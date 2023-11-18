@@ -7,15 +7,15 @@
 #include <stdio.h>
 
 int fn_isalpha(int character) {
-    if (character >= 65 && character <= 90 
-        || character >= 97 && character <= 122)
+    if ((character >= 65 && character <= 90) 
+        || (character >= 97 && character <= 122))
     {
         return 1;
     }
     return 0;
 }
 
-int main(int argc, char **argv) {
+int main() {
     printf("The output for 'b' is (1 is alpha, 0 no): %d\n", fn_isalpha('b'));
     printf("The output for '[' is (1 is alpha, 0 no): %d\n", fn_isalpha('['));
     return 0;
