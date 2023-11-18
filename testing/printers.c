@@ -10,7 +10,7 @@ void print_pass_int(int original, int copy)
 }
 void print_fail_int(int original, int copy)
 {
-    printf(COLOR_GREEN"expected: %d, result: %d. PASS\n"COLOR_RESET, original, copy);
+    printf(COLOR_RED"expected: %d, result: %d. FAIL\n"COLOR_RESET, original, copy);
 }
 
 void print_test_title(char *title) {
