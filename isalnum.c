@@ -1,15 +1,9 @@
-/*
- * Function to determine if the input is alphanumeric
- * is alphanumeric = 1
- * not alphanumeric = 0
- */
-
-
-int ft_isalnum(int input)
+// ascii valus of A to z and numbers
+int ft_isalnum(int c)
 {
-    if ((input >= 48 && input <= 57)
-        || (input >= 65 && input <= 90)
-        || (input >= 97 && input <= 122))
+    if ((c >= 48 && c <= 57)
+        || (c >= 65 && c <= 90)
+        || (c >= 97 && c <= 122))
     {
         return 1;
     }
