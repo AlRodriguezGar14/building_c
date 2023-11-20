@@ -5,7 +5,7 @@
  */
 
 
-int fn_isdigit(int input)
+int ft_isdigit(int input)
 {
     if (input >= 48 && input <= 57) // ascii: 48 = 0, 57 = 9
     {

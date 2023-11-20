@@ -4,6 +4,7 @@
 #include "../isalnum.c"
 #include "../isalpha.c"
 #include "../isdigit.c"
+#include "../isascii.c"
 
 
 void print_pass_int(int original, int copy);
@@ -16,7 +17,14 @@ void test_different_char_types(CharTypeChecker char_type_checker, CharTypeChecke
 {
     print_test_title(title);
     const char testing_chars[] = {
-        "1+&0 aB"
+        '\x80',
+        '1',
+        '+',
+        '&',
+        '0',
+        ' ',
+        'a',
+        'B'
     };
 
     for (unsigned long i = 0; i < sizeof(testing_chars) - 1; ++i)
@@ -35,8 +43,9 @@ void test_different_char_types(CharTypeChecker char_type_checker, CharTypeChecke
 
 int main()
 {
-    test_different_char_types(&isdigit, &fn_isdigit, "Testing isdigit()");   
-    test_different_char_types(&isalpha, &fn_isalpha, "Testing isalpha()");   
-    test_different_char_types(&isalnum, &fn_isalnum, "Testing isalnum()");   
+    test_different_char_types(&isdigit, &ft_isdigit, "Testing isdigit()");   
+    test_different_char_types(&isalpha, &ft_isalpha, "Testing isalpha()");   
+    test_different_char_types(&isalnum, &ft_isalnum, "Testing isalnum()");   
+    test_different_char_types(&isascii, &ft_isascii, "Testing isascii()");   
     return 0;
 }

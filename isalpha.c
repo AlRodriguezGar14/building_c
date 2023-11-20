@@ -4,7 +4,7 @@
 * The received argumen is an integer
  */
 
-int fn_isalpha(int character) {
+int ft_isalpha(int character) {
     if ((character >= 65 && character <= 90) 
         || (character >= 97 && character <= 122))
     {

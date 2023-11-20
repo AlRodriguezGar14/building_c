@@ -5,7 +5,7 @@
  */
 
 
-int fn_isalnum(int input)
+int ft_isalnum(int input)
 {
     if ((input >= 48 && input <= 57)
         || (input >= 65 && input <= 90)
