@@ -11,6 +11,8 @@
 #include "../isprint.c"
 #include "../strlen.c"
 #include "../memset.c"
+#include "../bzero.c"
+
 
 
 void print_pass_int(int original, int copy);
@@ -21,38 +23,47 @@ void    print_str_comparison(char *original, char *copy);
 typedef int (*CharTypeChecker)(int);
 typedef size_t (*CheckStringContent)(const char*);
 typedef void* (*MemSet)(void*, int, size_t);
+typedef void (*Bzero)(void*, size_t);
 
-void test_manipulate_string(MemSet original_func, MemSet my_func, char* title)
-{
+
+typedef enum {
+    MEMSET_FUNC,
+    BZERO_FUNC,
+} StringManipulationFunction;
+
+
+void string_manipulation_test(void* original_func, void* my_func, char* title, char** tests_a, char** tests_b, StringManipulationFunction func_type) {
     print_test_title(title);
-    char *tests_a[] = {
-        "Hello how are you doing?",
-        "I'm using multipl€ ic0ns & numbers",
-        "Add\tsome\ttabs"
-    };
-    
-    char *tests_b[] = {
-        "Hello how are you doing?",
-        "I'm using multipl€ ic0ns & numbers",
-        "Add\tsome\ttabs"
-    };
 
-    for (int i = 0; i < sizeof(tests_a) / sizeof(tests_a[0]); i++) {
+    for (int i = 0; tests_a[i] != NULL; i++) {
         printf("Input: '%s' - ", tests_a[i]);
 
-        char *a = malloc(strlen(tests_a[i]) + 1);
-        char *b = malloc(strlen(tests_b[i]) + 1);
+        char* a = malloc(ft_strlen(tests_a[i]) + 1);
+        char* b = malloc(ft_strlen(tests_b[i]) + 1);
         strcpy(a, tests_a[i]);
         strcpy(b, tests_b[i]);
 
-        original_func(a, '*', sizeof(char)*i);
-        my_func(b, '*', sizeof(char)*i);
+        switch (func_type) {
+            case MEMSET_FUNC:
+                ((MemSet)original_func)(a, '*', sizeof(char) * i);
+                ((MemSet)my_func)(b, '*', sizeof(char) * i);
+                break;
+            case BZERO_FUNC:
+                ((Bzero)original_func)(a, sizeof(char) * i);
+                ((Bzero)my_func)(b, sizeof(char) * i);
+                break;
+            // Add cases for more functions
+            default:
+                // Handle unsupported function type
+                break;
+        }
 
         print_str_comparison(a, b);
         free(a);
         free(b);
     }
 }
+
 
 void test_string_content(CheckStringContent original_function, CheckStringContent my_function, char* title)
 {
@@ -106,6 +117,21 @@ void test_different_char_types(CharTypeChecker char_type_checker, CharTypeChecke
 
 int main()
 {
+
+    char *tests_a[] = {
+        "Hello how are you doing?",
+        "I'm using multipl€ ic0ns & numbers",
+        "Add\tsome\ttabs",
+        NULL
+    };
+    
+    char *tests_b[] = {
+        "Hello how are you doing?",
+        "I'm using multipl€ ic0ns & numbers",
+        "Add\tsome\ttabs",
+        NULL
+    };
+
     // Char type functions
     test_different_char_types(&isdigit, &ft_isdigit, "Testing isdigit()");   
     test_different_char_types(&isalpha, &ft_isalpha, "Testing isalpha()");   
@@ -118,6 +144,7 @@ int main()
     test_string_content(&strlen, &ft_strlen, "Testing strlen()");
 
     // Manipulate content of strings
-    test_manipulate_string(&memset, &ft_memset, "Testing memset()");
+    string_manipulation_test(&memset, &ft_memset, "Testing memset()", tests_a, tests_b, MEMSET_FUNC);
+    string_manipulation_test(&bzero, &ft_bzero, "Testing bzero()", tests_a, tests_b, BZERO_FUNC);
     return 0;
 }
