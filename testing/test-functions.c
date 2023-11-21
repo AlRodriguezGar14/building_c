@@ -19,6 +19,7 @@
 #include "../toupper.c"
 #include "../tolower.c"
 #include "../strchr.c"
+#include "../strrchr.c"
 
 
 
@@ -40,7 +41,8 @@ typedef enum {
     STRLCAT_FUNC,
     TOUPPER_FUNC,
     TOLOWER_FUNC,
-    STRCHR_FUNC
+    STRCHR_FUNC,
+    STRRCHR_FUNC
 } StringManipulationFunction;
 
 
@@ -120,9 +122,13 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
             case STRCHR_FUNC:
                 return_char_a = strchr(a, 's'); 
                 return_char_b = ft_strchr(b, 's');
-                // printf("a: %s\n", return_char_a);
-                // printf("b: %s\n", return_char_b);
                 print_str_comparison(return_char_a, return_char_b);
+                break;
+            case STRRCHR_FUNC:
+                return_char_a = strrchr(a, 's'); 
+                return_char_b = ft_strrchr(b, 's');
+                print_str_comparison(return_char_a, return_char_b);
+                break;
             default:
                 // Handle unsupported function type
                 break;
@@ -239,6 +245,7 @@ int main()
     string_manipulation_test("Testing toupper()", tests_a, tests_b, TOUPPER_FUNC);
     string_manipulation_test("Testing tolower()", tests_a, tests_b, TOLOWER_FUNC);
     string_manipulation_test("Testing strchr()", tests_a, tests_b, STRCHR_FUNC);
+    string_manipulation_test("Testing strrchr()", tests_a, tests_b, STRRCHR_FUNC);
 
     return 0;
 }

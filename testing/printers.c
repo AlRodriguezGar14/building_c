@@ -29,9 +29,15 @@ void    print_str_comparison(char *original, char *copy)
         return;
     }
     
-    if (original == NULL || copy == NULL)
+    if (original == NULL)
     {
-        printf(COLOR_RED"Error: one of the outputs is null\n"COLOR_RESET);
+        print_pass_str("(null)", copy);
+        return;
+    }
+
+    if (copy == NULL)
+    {
+        print_fail_str(original, "(null)");
         return;
     }
     if (strcmp(original, copy) == 0) {
