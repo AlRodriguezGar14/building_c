@@ -80,13 +80,13 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 print_str_comparison(dest_tmp, a);
                 break;
             case MEMMOVE_FUNC:
-                memmove(dest_tmp, src_tmp, 10);
-                ft_memmove(a, b, 10);
+                memmove(dest_tmp, src_tmp, 13 - i);
+                ft_memmove(a, b, 13 - i);
                 print_str_comparison(dest_tmp, a);
                 break;
             case STRLCPY_FUNC:
-                return_a = strlcpy(dest_tmp, src_tmp, 10);
-                return_b = ft_strlcpy(a, b, 10);
+                return_a = strlcpy(dest_tmp, src_tmp, 13 - i);
+                return_b = ft_strlcpy(a, b, 13 - i);
                 // printf("return a: %d, return b: %d\n", return_a, return_b);
                 print_str_comparison(dest_tmp, a);
                 break;
@@ -161,21 +161,21 @@ int main()
     char *tests_a[] = {
         "Hello how are you doing?",
         "I'm using multipl€ ic0ns & numbers",
-        "12232-,,,.fshajk 43_-fd",
+        "12232-,,,.fshaj\10k 43_-fd",
         NULL
     };
    // For same content 
     char *tests_b[] = {
         "Hello how are you doing?",
         "I'm using multipl€ ic0ns & numbers",
-        "12232-,,,.fshajk 43_-fd",
+        "12232-,,,.fshaj\10k 43_-fd",
         NULL
     };
     // For different content
     char *tests_c[] = {
         "Replacing the first",
         "Continu€ R€placing!!1!1",
-        "These are more normal chars",
+        "These\10 are more normal chars",
         NULL
     };
 
