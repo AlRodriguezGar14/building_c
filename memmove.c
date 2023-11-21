@@ -4,49 +4,82 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// this should be memcpy, but I'm having compiler errors
-// try to replace it once it's converted to a library
-static void *copy(void *dest, void *src, size_t bytes_copied)
+void *ft_memmove(void *dest, const void *src, size_t n)
 {
-    int     idx = 0;
     char    *char_dest = (char *)dest;
     char    *char_src = (char *)src;
+    char    *tmp = (char *)malloc(sizeof(char) * n);
+    
+    if (char_dest == char_src)
+        return char_dest;
 
-    while (idx < bytes_copied)
+    if (tmp == NULL)
     {
-        char_dest[idx] = char_src[idx];
+        return NULL;
+    }
+
+    int     idx = 0;
+    while(idx < n)
+    {
+        tmp[idx] = char_src[idx];
         idx++;
     }
 
-    return dest;
-}
-
-// The logic of this code has been taken from: https://opensource.apple.com/source/network_cmds/network_cmds-481.20.1/unbound/compat/memmove.c.auto.html
-void *ft_memmove(void *dest, void *src, size_t n)
-{
-    char    *char_dest = (char *)dest;
-    char    *char_src = (char *)src;
-
-    int idx = 0;
-    
-    if (char_dest == char_src || n == 0)
-        return dest;
-
-    if (char_dest > char_src && char_dest - char_src < (int)n)
+    idx = 0;
+    while(idx < n)
     {
-        while (n--)
-            char_dest[n] = char_src[n]; // copy in reverse to avoid the overlapping found in continuous order
-    } else if (char_src > char_dest && char_src - char_dest < (int)n) {
-        while (idx < n) {
-            char_dest[idx] = char_src[idx];
-            idx++;
-        }
-    } else {
-        copy(dest, src, n);
+        char_dest[idx] = tmp[idx];
+        idx++;
     }
 
+    free(tmp);
+
     return dest;
 }
+
+// this should be memcpy, but I'm having compiler errors
+// try to replace it once it's converted to a library
+// static void *copy(void *dest, void *src, size_t bytes_copied)
+// {
+//     int     idx = 0;
+//     char    *char_dest = (char *)dest;
+//     char    *char_src = (char *)src;
+//
+//     while (idx < bytes_copied)
+//     {
+//         char_dest[idx] = char_src[idx];
+//         idx++;
+//     }
+//
+//     return dest;
+// }
+//
+// The logic of this code has been taken from: https://opensource.apple.com/source/network_cmds/network_cmds-481.20.1/unbound/compat/memmove.c.auto.html
+// void *ft_memmove(void *dest, void *src, size_t n)
+// {
+//     char    *char_dest = (char *)dest;
+//     char    *char_src = (char *)src;
+//
+//     int idx = 0;
+//     
+//     if (char_dest == char_src || n == 0)
+//         return dest;
+//
+//     if (char_dest > char_src && char_dest - char_src < (int)n)
+//     {
+//         while (n--)
+//             char_dest[n] = char_src[n]; 
+//     } else if (char_src > char_dest && char_src - char_dest < (int)n) {
+//         while (idx < n) {
+//             char_dest[idx] = char_src[idx];
+//             idx++;
+//         }
+//     } else {
+//         copy(dest, src, n);
+//     }
+//
+//     return dest;
+// }
 
 /*
 The main idea of the logic is to choose if:
