@@ -14,6 +14,7 @@
 #include "../bzero.c"
 #include "../memcpy.c"
 #include "../memmove.c"
+#include "../strlcpy.c"
 
 
 
@@ -30,7 +31,8 @@ typedef enum {
     MEMSET_FUNC,
     BZERO_FUNC,
     MEMCPY_FUNC,
-    MEMMOVE_FUNC
+    MEMMOVE_FUNC,
+    STRLCPY_FUNC
 } StringManipulationFunction;
 
 
@@ -59,6 +61,8 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
         strcpy(src_tmp, tmp_b);
 
 
+        int return_a;
+        int return_b;
         switch (func_type) {
             case MEMSET_FUNC:
                 memset(a, '*', sizeof(char) * i);
@@ -76,8 +80,14 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 print_str_comparison(dest_tmp, a);
                 break;
             case MEMMOVE_FUNC:
-                memmove(dest_tmp, b, 5);
-                ft_memmove(a, b, 5);
+                memmove(dest_tmp, src_tmp, 10);
+                ft_memmove(a, b, 10);
+                print_str_comparison(dest_tmp, a);
+                break;
+            case STRLCPY_FUNC:
+                return_a = strlcpy(dest_tmp, src_tmp, 10);
+                return_b = ft_strlcpy(a, b, 10);
+                // printf("return a: %d, return b: %d\n", return_a, return_b);
                 print_str_comparison(dest_tmp, a);
                 break;
             default:
@@ -151,21 +161,21 @@ int main()
     char *tests_a[] = {
         "Hello how are you doing?",
         "I'm using multipl€ ic0ns & numbers",
-        "Add\tsome\ttabs",
+        "12232-,,,.fshajk 43_-fd",
         NULL
     };
-    
+   // For same content 
     char *tests_b[] = {
         "Hello how are you doing?",
         "I'm using multipl€ ic0ns & numbers",
-        "Add\tsome\ttabs",
+        "12232-,,,.fshajk 43_-fd",
         NULL
     };
-
+    // For different content
     char *tests_c[] = {
         "Replacing the first",
         "Continu€ R€placing!!1!1",
-        "replace\tfor\ttabs",
+        "These are more normal chars",
         NULL
     };
 
@@ -185,6 +195,7 @@ int main()
     string_manipulation_test("Testing bzero()", tests_a, tests_b, BZERO_FUNC);
     string_manipulation_test("Testing memcpy()", tests_a, tests_c, MEMCPY_FUNC);
     string_manipulation_test("Testing memmove()", tests_a, tests_c, MEMMOVE_FUNC);
+    string_manipulation_test("Testing strlcpy()", tests_a, tests_c, STRLCPY_FUNC);
 
     return 0;
 }
