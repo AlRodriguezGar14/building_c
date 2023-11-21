@@ -16,6 +16,8 @@
 #include "../memmove.c"
 #include "../strlcpy.c"
 #include "../strlcat.c"
+#include "../toupper.c"
+#include "../tolower.c"
 
 
 
@@ -34,7 +36,9 @@ typedef enum {
     MEMCPY_FUNC,
     MEMMOVE_FUNC,
     STRLCPY_FUNC,
-    STRLCAT_FUNC
+    STRLCAT_FUNC,
+    TOUPPER_FUNC,
+    TOLOWER_FUNC
 } StringManipulationFunction;
 
 
@@ -94,10 +98,20 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 print_str_comparison(dest_tmp, a);
                 break;
             case STRLCAT_FUNC:
-                return_a = strlcat(dest_tmp, src_tmp, strlen(dest_tmp) + 5);
-                return_b = ft_strlcat(a, b, strlen(a) + 5);
+                strlcat(dest_tmp, src_tmp, strlen(dest_tmp) + 5);
+                ft_strlcat(a, b, strlen(a) + 5);
                 print_str_comparison(dest_tmp, a);
-
+                break;
+            case TOUPPER_FUNC:
+                return_a = toupper(a[0]); 
+                return_b = ft_toupper(b[0]);
+                print_str_comparison((char*)&return_a, (char*)&return_b);
+                break;
+            case TOLOWER_FUNC:
+                return_a = tolower(a[0]); 
+                return_b = ft_tolower(b[0]);
+                print_str_comparison((char*)&return_a, (char*)&return_b);
+                break;
             default:
                 // Handle unsupported function type
                 break;
@@ -149,7 +163,7 @@ void test_different_char_types(CharTypeChecker char_type_checker, CharTypeChecke
         'B'
     };
 
-    for (unsigned long i = 0; i < sizeof(testing_chars) - 1; ++i)
+    for (unsigned long i = 0; i < sizeof(testing_chars); ++i)
     {
         int original = char_type_checker(testing_chars[i]);
         int copy = my_checker(testing_chars[i]);
@@ -211,6 +225,8 @@ int main()
     string_manipulation_test("Testing memmove()", tests_a, tests_c, MEMMOVE_FUNC);
     string_manipulation_test("Testing strlcpy()", tests_a, tests_c, STRLCPY_FUNC);
     string_manipulation_test("Testing strlcat()", tests_a, tests_c, STRLCAT_FUNC);
+    string_manipulation_test("Testing toupper()", tests_a, tests_b, TOUPPER_FUNC);
+    string_manipulation_test("Testing tolower()", tests_a, tests_b, TOLOWER_FUNC);
 
     return 0;
 }
