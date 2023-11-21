@@ -13,6 +13,7 @@
 #include "../memset.c"
 #include "../bzero.c"
 #include "../memcpy.c"
+#include "../memmove.c"
 
 
 
@@ -28,43 +29,63 @@ typedef size_t (*CheckStringContent)(const char*);
 typedef enum {
     MEMSET_FUNC,
     BZERO_FUNC,
-    MEMCPY_FUNC
+    MEMCPY_FUNC,
+    MEMMOVE_FUNC
 } StringManipulationFunction;
 
 
-void string_manipulation_test(char* title, char** tests_a, char** tests_b, StringManipulationFunction func_type) {
+void string_manipulation_test(char *title, char **tests_a, char **tests_b, StringManipulationFunction func_type) {
     print_test_title(title);
 
     for (int i = 0; tests_a[i] != NULL; i++) {
         printf("Input: '%s' - ", tests_a[i]);
 
-        char* a = malloc(ft_strlen(tests_a[i]) + 1);
-        char* b = malloc(ft_strlen(tests_b[i]) + 1);
+        char *a = malloc(ft_strlen(tests_a[i]) + 1);
+        char *b = malloc(ft_strlen(tests_b[i]) + 1);
+        char *tmp_a = malloc(ft_strlen(tests_a[i]) + 1);
+        char *tmp_b = malloc(ft_strlen(tests_b[i]) + 1);
         strcpy(a, tests_a[i]);
+        strcpy(tmp_a, tests_a[i]);
         strcpy(b, tests_b[i]);
+        strcpy(tmp_b, tests_b[i]);
+
+        size_t len = ft_strlen(a);
 
         switch (func_type) {
             case MEMSET_FUNC:
                 memset(a, '*', sizeof(char) * i);
                 ft_memset(b, '*', sizeof(char) * i);
+                print_str_comparison(a, b);
                 break;
             case BZERO_FUNC:
                 bzero(a, sizeof(char) * i);
                 ft_bzero(b, sizeof(char) * i);
+                print_str_comparison(a, b);
                 break;
             case MEMCPY_FUNC:
-                memcpy(a, b, ft_strlen(b) + 1);
-                ft_memcpy(b, a, ft_strlen(a) + 1);
+                {
+                    // Ensure that destination doesn't overlap with source
+                    char *dest_tmp = malloc(len + 1);
+                    memcpy(dest_tmp, tmp_b, len + 1);
+                    ft_memcpy(a, b, len + 1);
+                    print_str_comparison(dest_tmp, a);
+                    free(dest_tmp);
+                }
                 break;
-            // Add cases for more functions
+            case MEMMOVE_FUNC:
+                memmove(tmp_a, tmp_b, 5);
+                ft_memmove(a, b, 5);
+                print_str_comparison(tmp_a, a);
+                break;
             default:
                 // Handle unsupported function type
                 break;
         }
 
-        print_str_comparison(a, b);
         free(a);
         free(b);
+        free(tmp_a);
+        free(tmp_b);
     }
 }
 
@@ -158,6 +179,7 @@ int main()
     string_manipulation_test("Testing memset()", tests_a, tests_b, MEMSET_FUNC);
     string_manipulation_test("Testing bzero()", tests_a, tests_b, BZERO_FUNC);
     string_manipulation_test("Testing memcpy()", tests_a, tests_c, MEMCPY_FUNC);
+    string_manipulation_test("Testing memmove()", tests_a, tests_c, MEMMOVE_FUNC);
 
     return 0;
 }

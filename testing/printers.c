@@ -10,14 +10,14 @@
 
 void print_pass_str(char *original, char *copy)
 {
-    printf(COLOR_YELLOW"expected: %s, "COLOR_RESET, original);
-    printf(COLOR_GREEN"result: %s. PASS\n"COLOR_RESET, copy);
+    printf(COLOR_YELLOW"expected: %s "COLOR_RESET, original);
+    printf(COLOR_GREEN"result: %s | PASS\n"COLOR_RESET, copy);
 }
 
 void print_fail_str(char *original, char *copy)
 {
-    printf(COLOR_YELLOW"expected: %s, "COLOR_RESET, original);
-    printf(COLOR_RED"result: %s. PASS\n"COLOR_RESET, copy);
+    printf(COLOR_YELLOW"expected: %s "COLOR_RESET, original);
+    printf(COLOR_RED"result: %s | FAIL\n"COLOR_RESET, copy);
 }
 
 void    print_str_comparison(char *original, char *copy)
@@ -32,13 +32,13 @@ void    print_str_comparison(char *original, char *copy)
 
 void print_pass_int(int original, int copy)
 {
-    printf(COLOR_YELLOW"expected: %d, "COLOR_RESET, original);
-    printf(COLOR_GREEN"result: %d. PASS\n"COLOR_RESET, copy);
+    printf(COLOR_YELLOW"expected: %d "COLOR_RESET, original);
+    printf(COLOR_GREEN"result: %d | PASS\n"COLOR_RESET, copy);
 }
 void print_fail_int(int original, int copy)
 {
-    printf(COLOR_YELLOW"expected: %d, "COLOR_RESET, original);
-    printf(COLOR_RED"result: %d. PASS\n"COLOR_RESET, copy);
+    printf(COLOR_YELLOW"expected: %d "COLOR_RESET, original);
+    printf(COLOR_RED"result: %d | FAIL\n"COLOR_RESET, copy);
 }
 
 
