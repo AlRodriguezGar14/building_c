@@ -15,6 +15,7 @@
 #include "../memcpy.c"
 #include "../memmove.c"
 #include "../strlcpy.c"
+#include "../strlcat.c"
 
 
 
@@ -32,7 +33,8 @@ typedef enum {
     BZERO_FUNC,
     MEMCPY_FUNC,
     MEMMOVE_FUNC,
-    STRLCPY_FUNC
+    STRLCPY_FUNC,
+    STRLCAT_FUNC
 } StringManipulationFunction;
 
 
@@ -40,7 +42,7 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
     print_test_title(title);
 
     for (int i = 0; tests_a[i] != NULL; i++) {
-        printf("Input: '%s' - ", tests_a[i]);
+        printf("Inputs: '%s' | '%s' - ", tests_a[i], tests_b[i]);
 
 
         char *a = malloc(ft_strlen(tests_a[i]) + 1);
@@ -91,6 +93,11 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 // printf("return a: %d, return b: %d\n", return_a, return_b);
                 print_str_comparison(dest_tmp, a);
                 break;
+            case STRLCAT_FUNC:
+                return_a = strlcat(dest_tmp, src_tmp, strlen(dest_tmp) + 5);
+                return_b = ft_strlcat(a, b, strlen(a) + 5);
+                print_str_comparison(dest_tmp, a);
+
             default:
                 // Handle unsupported function type
                 break;
@@ -147,7 +154,7 @@ void test_different_char_types(CharTypeChecker char_type_checker, CharTypeChecke
         int original = char_type_checker(testing_chars[i]);
         int copy = my_checker(testing_chars[i]);
         
-        printf("Input: '%c' - ", testing_chars[i]);
+        printf("Inputs: '%c' - ", testing_chars[i]);
         if (original == copy)
             print_pass_int(original, copy);
         else
@@ -203,6 +210,7 @@ int main()
     string_manipulation_test("Testing memcpy()", tests_a, tests_c, MEMCPY_FUNC);
     string_manipulation_test("Testing memmove()", tests_a, tests_c, MEMMOVE_FUNC);
     string_manipulation_test("Testing strlcpy()", tests_a, tests_c, STRLCPY_FUNC);
+    string_manipulation_test("Testing strlcat()", tests_a, tests_c, STRLCAT_FUNC);
 
     return 0;
 }
