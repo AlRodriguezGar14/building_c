@@ -31,7 +31,7 @@ void    print_str_comparison(char *original, char *copy)
     
     if (original == NULL)
     {
-        print_pass_str("(null)", copy);
+        print_fail_str("(null)", copy);
         return;
     }
 

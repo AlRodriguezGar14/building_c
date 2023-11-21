@@ -21,6 +21,7 @@
 #include "../strchr.c"
 #include "../strrchr.c"
 #include "../strncmp.c"
+#include "../memchr.c"
 
 
 
@@ -45,7 +46,8 @@ typedef enum {
     TOLOWER_FUNC,
     STRCHR_FUNC,
     STRRCHR_FUNC,
-    STRNCMP_FUNC
+    STRNCMP_FUNC,
+    MEMCHR_FUNC 
 } StringManipulationFunction;
 
 
@@ -136,6 +138,11 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 return_a = strncmp(a, b, strlen(a)); 
                 return_b = ft_strncmp(a, b, strlen(a));
                 print_int_comparison(return_a, return_b);
+                break;
+            case MEMCHR_FUNC:
+                return_char_a = memchr(a, 'i', 25); 
+                return_char_b = ft_memchr(b, 'i', 25);
+                print_str_comparison(return_char_a, return_char_b);
                 break;
             default:
                 // Handle unsupported function type
@@ -265,6 +272,7 @@ int main()
     string_manipulation_test("Testing strchr()", tests_a, tests_b, STRCHR_FUNC);
     string_manipulation_test("Testing strrchr()", tests_a, tests_b, STRRCHR_FUNC);
     string_manipulation_test("Testing strncmp()", tests_a, tests_d, STRNCMP_FUNC);
+    string_manipulation_test("Testing memchr()", tests_a, tests_b, MEMCHR_FUNC);
 
     return 0;
 }
