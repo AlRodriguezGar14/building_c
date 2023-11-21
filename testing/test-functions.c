@@ -12,6 +12,7 @@
 #include "../strlen.c"
 #include "../memset.c"
 #include "../bzero.c"
+#include "../memcpy.c"
 
 
 
@@ -22,17 +23,16 @@ void    print_str_comparison(char *original, char *copy);
 
 typedef int (*CharTypeChecker)(int);
 typedef size_t (*CheckStringContent)(const char*);
-typedef void* (*MemSet)(void*, int, size_t);
-typedef void (*Bzero)(void*, size_t);
 
 
 typedef enum {
     MEMSET_FUNC,
     BZERO_FUNC,
+    MEMCPY_FUNC
 } StringManipulationFunction;
 
 
-void string_manipulation_test(void* original_func, void* my_func, char* title, char** tests_a, char** tests_b, StringManipulationFunction func_type) {
+void string_manipulation_test(char* title, char** tests_a, char** tests_b, StringManipulationFunction func_type) {
     print_test_title(title);
 
     for (int i = 0; tests_a[i] != NULL; i++) {
@@ -45,12 +45,16 @@ void string_manipulation_test(void* original_func, void* my_func, char* title, c
 
         switch (func_type) {
             case MEMSET_FUNC:
-                ((MemSet)original_func)(a, '*', sizeof(char) * i);
-                ((MemSet)my_func)(b, '*', sizeof(char) * i);
+                memset(a, '*', sizeof(char) * i);
+                ft_memset(b, '*', sizeof(char) * i);
                 break;
             case BZERO_FUNC:
-                ((Bzero)original_func)(a, sizeof(char) * i);
-                ((Bzero)my_func)(b, sizeof(char) * i);
+                bzero(a, sizeof(char) * i);
+                ft_bzero(b, sizeof(char) * i);
+                break;
+            case MEMCPY_FUNC:
+                memcpy(a, b, ft_strlen(b) + 1);
+                ft_memcpy(b, a, ft_strlen(a) + 1);
                 break;
             // Add cases for more functions
             default:
@@ -132,6 +136,13 @@ int main()
         NULL
     };
 
+    char *tests_c[] = {
+        "Replacing the first",
+        "Continu€ R€placing!!1!1",
+        "replace\tfor\ttabs",
+        NULL
+    };
+
     // Char type functions
     test_different_char_types(&isdigit, &ft_isdigit, "Testing isdigit()");   
     test_different_char_types(&isalpha, &ft_isalpha, "Testing isalpha()");   
@@ -144,7 +155,9 @@ int main()
     test_string_content(&strlen, &ft_strlen, "Testing strlen()");
 
     // Manipulate content of strings
-    string_manipulation_test(&memset, &ft_memset, "Testing memset()", tests_a, tests_b, MEMSET_FUNC);
-    string_manipulation_test(&bzero, &ft_bzero, "Testing bzero()", tests_a, tests_b, BZERO_FUNC);
+    string_manipulation_test("Testing memset()", tests_a, tests_b, MEMSET_FUNC);
+    string_manipulation_test("Testing bzero()", tests_a, tests_b, BZERO_FUNC);
+    string_manipulation_test("Testing memcpy()", tests_a, tests_c, MEMCPY_FUNC);
+
     return 0;
 }
