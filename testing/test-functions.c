@@ -48,12 +48,13 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
         strcpy(a, tests_a[i]);
         strcpy(b, tests_b[i]);
 
-        size_t len = ft_strlen(a);
+        size_t len_a = ft_strlen(a);
+        size_t len_b = ft_strlen(b);
 
-        char *tmp_a = malloc(len + 1);
-        char *tmp_b = malloc(len + 1);
-        char *dest_tmp = malloc(len + 1);
-        char *src_tmp = malloc(len + 1);
+        char *tmp_a = malloc(len_a + 1);
+        char *tmp_b = malloc(len_b + 1);
+        char *dest_tmp = malloc(len_a+ 1);
+        char *src_tmp = malloc(len_b + 1);
         strcpy(tmp_a, tests_a[i]);
         strcpy(tmp_b, tests_b[i]);
         // Ensure that destination doesn't overlap with source
@@ -75,8 +76,8 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 print_str_comparison(a, b);
                 break;
             case MEMCPY_FUNC:
-                memcpy(dest_tmp, src_tmp, len + 1);
-                ft_memcpy(a, b, len + 1);
+                memcpy(dest_tmp, src_tmp, len_a + 1);
+                ft_memcpy(a, b, len_a + 1);
                 print_str_comparison(dest_tmp, a);
                 break;
             case MEMMOVE_FUNC:
@@ -162,6 +163,8 @@ int main()
         "Hello how are you doing?",
         "I'm using multipl€ ic0ns & numbers",
         "12232-,,,.fshaj\10k 43_-fd",
+        "tabla\ttablao\ttab",
+        "main short",
         NULL
     };
    // For same content 
@@ -169,6 +172,8 @@ int main()
         "Hello how are you doing?",
         "I'm using multipl€ ic0ns & numbers",
         "12232-,,,.fshaj\10k 43_-fd",
+        "tabla\ttablao\ttab",
+        "main short",
         NULL
     };
     // For different content
@@ -176,6 +181,8 @@ int main()
         "Replacing the first",
         "Continu€ R€placing!!1!1",
         "These\10 are more normal chars",
+        "i like\ttabs\tabs",
+        "the c options is much larger",
         NULL
     };
 
