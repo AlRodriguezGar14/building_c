@@ -47,7 +47,6 @@ void    print_str_comparison(char *original, char *copy)
     print_fail_str(original, copy);
 }
 
-
 void print_pass_int(int original, int copy)
 {
     printf(COLOR_YELLOW"expected: %d "COLOR_RESET, original);
@@ -59,6 +58,14 @@ void print_fail_int(int original, int copy)
     printf(COLOR_RED"result: %d | FAIL\n"COLOR_RESET, copy);
 }
 
+
+void    print_int_comparison(int original, int copy)
+{
+    if (original == copy)
+        print_pass_int(original, copy);
+    else
+        print_fail_int(original,copy);
+}
 
 void print_test_title(char *title) {
     printf("\n");

@@ -20,6 +20,7 @@
 #include "../tolower.c"
 #include "../strchr.c"
 #include "../strrchr.c"
+#include "../strncmp.c"
 
 
 
@@ -27,6 +28,7 @@ void print_pass_int(int original, int copy);
 void print_fail_int(int original, int copy);
 void print_test_title(char *title);
 void    print_str_comparison(char *original, char *copy);
+void    print_int_comparison(int original, int copy);
 
 typedef int (*CharTypeChecker)(int);
 typedef size_t (*CheckStringContent)(const char*);
@@ -42,7 +44,8 @@ typedef enum {
     TOUPPER_FUNC,
     TOLOWER_FUNC,
     STRCHR_FUNC,
-    STRRCHR_FUNC
+    STRRCHR_FUNC,
+    STRNCMP_FUNC
 } StringManipulationFunction;
 
 
@@ -129,6 +132,11 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 return_char_b = ft_strrchr(b, 's');
                 print_str_comparison(return_char_a, return_char_b);
                 break;
+            case STRNCMP_FUNC:
+                return_a = strncmp(a, b, strlen(a)); 
+                return_b = ft_strncmp(a, b, strlen(a));
+                print_int_comparison(return_a, return_b);
+                break;
             default:
                 // Handle unsupported function type
                 break;
@@ -201,7 +209,7 @@ int main()
         "Hello how are you doing?",
         "I'm using multipl€ ic0ns & numbers",
         "12232-,,,.fshaj\10k 43_-fd",
-        "tabla\ttablao\ttab",
+        "tabla\ttablao\ttablita",
         "main short",
         NULL
     };
@@ -210,7 +218,7 @@ int main()
         "Hello how are you doing?",
         "I'm using multipl€ ic0ns & numbers",
         "12232-,,,.fshaj\10k 43_-fd",
-        "tabla\ttablao\ttab",
+        "tabla\ttablao\ttablita",
         "main short",
         NULL
     };
@@ -221,6 +229,16 @@ int main()
         "These\10 are more normal chars",
         "i like\ttabs\tabs",
         "the c options is much larger",
+        NULL
+    };
+
+    // For comparison - similarity check
+    char *tests_d[] = {
+        "Hello how are you doing?",
+        "I'm using multipl€ ic0ns or numbers",
+        "13232-,,,.fshaj\10k 43_-fd",
+        "tabla\ttablao\ttab",
+        "main short",
         NULL
     };
 
@@ -246,6 +264,7 @@ int main()
     string_manipulation_test("Testing tolower()", tests_a, tests_b, TOLOWER_FUNC);
     string_manipulation_test("Testing strchr()", tests_a, tests_b, STRCHR_FUNC);
     string_manipulation_test("Testing strrchr()", tests_a, tests_b, STRRCHR_FUNC);
+    string_manipulation_test("Testing strncmp()", tests_a, tests_d, STRNCMP_FUNC);
 
     return 0;
 }
