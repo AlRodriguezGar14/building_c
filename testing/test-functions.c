@@ -40,16 +40,24 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
     for (int i = 0; tests_a[i] != NULL; i++) {
         printf("Input: '%s' - ", tests_a[i]);
 
+
         char *a = malloc(ft_strlen(tests_a[i]) + 1);
         char *b = malloc(ft_strlen(tests_b[i]) + 1);
-        char *tmp_a = malloc(ft_strlen(tests_a[i]) + 1);
-        char *tmp_b = malloc(ft_strlen(tests_b[i]) + 1);
         strcpy(a, tests_a[i]);
-        strcpy(tmp_a, tests_a[i]);
         strcpy(b, tests_b[i]);
-        strcpy(tmp_b, tests_b[i]);
 
         size_t len = ft_strlen(a);
+
+        char *tmp_a = malloc(len + 1);
+        char *tmp_b = malloc(len + 1);
+        char *dest_tmp = malloc(len + 1);
+        char *src_tmp = malloc(len + 1);
+        strcpy(tmp_a, tests_a[i]);
+        strcpy(tmp_b, tests_b[i]);
+        // Ensure that destination doesn't overlap with source
+        strcpy(dest_tmp, tmp_a);
+        strcpy(src_tmp, tmp_b);
+
 
         switch (func_type) {
             case MEMSET_FUNC:
@@ -63,19 +71,14 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 print_str_comparison(a, b);
                 break;
             case MEMCPY_FUNC:
-                {
-                    // Ensure that destination doesn't overlap with source
-                    char *dest_tmp = malloc(len + 1);
-                    memcpy(dest_tmp, tmp_b, len + 1);
-                    ft_memcpy(a, b, len + 1);
-                    print_str_comparison(dest_tmp, a);
-                    free(dest_tmp);
-                }
+                memcpy(dest_tmp, src_tmp, len + 1);
+                ft_memcpy(a, b, len + 1);
+                print_str_comparison(dest_tmp, a);
                 break;
             case MEMMOVE_FUNC:
-                memmove(tmp_a, tmp_b, 5);
+                memmove(dest_tmp, b, 5);
                 ft_memmove(a, b, 5);
-                print_str_comparison(tmp_a, a);
+                print_str_comparison(dest_tmp, a);
                 break;
             default:
                 // Handle unsupported function type
@@ -86,6 +89,8 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
         free(b);
         free(tmp_a);
         free(tmp_b);
+        free(dest_tmp);
+        free(src_tmp);
     }
 }
 
