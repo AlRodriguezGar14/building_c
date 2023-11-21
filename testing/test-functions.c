@@ -18,6 +18,7 @@
 #include "../strlcat.c"
 #include "../toupper.c"
 #include "../tolower.c"
+#include "../strchr.c"
 
 
 
@@ -38,7 +39,8 @@ typedef enum {
     STRLCPY_FUNC,
     STRLCAT_FUNC,
     TOUPPER_FUNC,
-    TOLOWER_FUNC
+    TOLOWER_FUNC,
+    STRCHR_FUNC
 } StringManipulationFunction;
 
 
@@ -70,6 +72,9 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
 
         int return_a;
         int return_b;
+        char *return_char_a;
+        char *return_char_b;
+
         switch (func_type) {
             case MEMSET_FUNC:
                 memset(a, '*', sizeof(char) * i);
@@ -112,6 +117,12 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 return_b = ft_tolower(b[0]);
                 print_str_comparison((char*)&return_a, (char*)&return_b);
                 break;
+            case STRCHR_FUNC:
+                return_char_a = strchr(a, 's'); 
+                return_char_b = ft_strchr(b, 's');
+                // printf("a: %s\n", return_char_a);
+                // printf("b: %s\n", return_char_b);
+                print_str_comparison(return_char_a, return_char_b);
             default:
                 // Handle unsupported function type
                 break;
@@ -227,6 +238,7 @@ int main()
     string_manipulation_test("Testing strlcat()", tests_a, tests_c, STRLCAT_FUNC);
     string_manipulation_test("Testing toupper()", tests_a, tests_b, TOUPPER_FUNC);
     string_manipulation_test("Testing tolower()", tests_a, tests_b, TOLOWER_FUNC);
+    string_manipulation_test("Testing strchr()", tests_a, tests_b, STRCHR_FUNC);
 
     return 0;
 }

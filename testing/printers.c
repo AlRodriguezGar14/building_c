@@ -6,6 +6,7 @@
 #define COLOR_GREEN   "\x1b[38;5;78m"
 #define COLOR_RESET   "\x1b[0m"
 #define COLOR_YELLOW  "\x1b[38;5;178m"
+#define COLOR_CYAN "\x1b[36m"
 
 
 void print_pass_str(char *original, char *copy)
@@ -22,6 +23,17 @@ void print_fail_str(char *original, char *copy)
 
 void    print_str_comparison(char *original, char *copy)
 {
+    if (original == NULL && copy == NULL)
+    {
+        printf(COLOR_CYAN"expected: (null) result: (null)\n"COLOR_RESET);
+        return;
+    }
+    
+    if (original == NULL || copy == NULL)
+    {
+        printf(COLOR_RED"Error: one of the outputs is null\n"COLOR_RESET);
+        return;
+    }
     if (strcmp(original, copy) == 0) {
         print_pass_str(original, copy);
         return;
