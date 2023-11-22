@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 // TOOO: Replace this with the import from the library lift.h once built
-static unsigned long ft_strlen2(const char *str) {
+static unsigned long ft_strlen2(const char *str)
+{
     unsigned long idx;
     
     idx = 0;
