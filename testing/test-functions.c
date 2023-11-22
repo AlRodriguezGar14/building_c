@@ -24,6 +24,7 @@
 #include "../memchr.c"
 #include "../memcmp.c"
 #include "../strnstr.c"
+#include "../atoi.c"
 
 
 
@@ -52,6 +53,7 @@ typedef enum {
     MEMCHR_FUNC,
     MEMCMP_FUNC,
     STRNSTR_FUNC,
+    ATOI_FUNC,
 } StringManipulationFunction;
 
 
@@ -157,6 +159,12 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 return_char_a = strnstr(dest_tmp, src_tmp, 50);
                 return_char_b = ft_strnstr(a, b, 50);
                 print_str_comparison(return_char_a, return_char_b);
+                break;
+            case ATOI_FUNC:
+                return_a = atoi(a);
+                return_b = ft_atoi(b);
+                print_int_comparison(return_a, return_b);
+                break;
             default:
                 // Handle unsupported function type
                 break;
@@ -281,6 +289,17 @@ int main()
         NULL
     };
 
+    char *atoi_test[] = {
+        "42",
+        "  -42",
+        "     42",
+        "   +42,33",
+        "    +-42",
+        "-2147483648",
+        "2147483647",
+        NULL
+    };
+
     // Char type functions
     test_different_char_types(&isdigit, &ft_isdigit, "Testing isdigit()");   
     test_different_char_types(&isalpha, &ft_isalpha, "Testing isalpha()");   
@@ -307,6 +326,8 @@ int main()
     string_manipulation_test("Testing memchr()", tests_a, tests_b, MEMCHR_FUNC);
     string_manipulation_test("Testing memcmp()", tests_a, tests_d, MEMCMP_FUNC);
     string_manipulation_test("Testing strnstr()", haystack, needle, STRNSTR_FUNC);
+    string_manipulation_test("Testing atoi()", atoi_test, atoi_test, ATOI_FUNC);
+
 
     return 0;
 }
