@@ -84,13 +84,13 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
 
         switch (func_type) {
             case MEMSET_FUNC:
-                memset(a, '*', sizeof(char) * i);
-                ft_memset(b, '*', sizeof(char) * i);
-                print_str_comparison(a, b);
+                return_char_a = (char*)memset(a, '*', sizeof(char) * 7);
+                return_char_b = (char*)ft_memset(b, '*', sizeof(char) * 7);
+                print_str_comparison(return_char_a, return_char_b);
                 break;
             case BZERO_FUNC:
-                bzero(a, sizeof(char) * i);
-                ft_bzero(b, sizeof(char) * i);
+                bzero(a, sizeof(char) * 7);
+                ft_bzero(b, sizeof(char) * 7);
                 print_str_comparison(a, b);
                 break;
             case MEMCPY_FUNC:
@@ -140,8 +140,8 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 print_int_comparison(return_a, return_b);
                 break;
             case MEMCHR_FUNC:
-                return_char_a = memchr(a, 'i', 25); 
-                return_char_b = ft_memchr(b, 'i', 25);
+                return_char_a = (char*)memchr(a, 'i', 25); 
+                return_char_b = (char*)ft_memchr(b, 'i', 25);
                 print_str_comparison(return_char_a, return_char_b);
                 break;
             default:
