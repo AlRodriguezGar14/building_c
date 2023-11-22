@@ -22,6 +22,7 @@
 #include "../strrchr.c"
 #include "../strncmp.c"
 #include "../memchr.c"
+#include "../memcmp.c"
 
 
 
@@ -47,7 +48,8 @@ typedef enum {
     STRCHR_FUNC,
     STRRCHR_FUNC,
     STRNCMP_FUNC,
-    MEMCHR_FUNC 
+    MEMCHR_FUNC,
+    MEMCMP_FUNC,
 } StringManipulationFunction;
 
 
@@ -89,8 +91,8 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 print_str_comparison(return_char_a, return_char_b);
                 break;
             case BZERO_FUNC:
-                bzero(a, sizeof(char) * 7);
-                ft_bzero(b, sizeof(char) * 7);
+                bzero(a, strlen(a));
+                ft_bzero(b, strlen(b));
                 print_str_comparison(a, b);
                 break;
             case MEMCPY_FUNC:
@@ -143,6 +145,11 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 return_char_a = (char*)memchr(a, 'i', 25); 
                 return_char_b = (char*)ft_memchr(b, 'i', 25);
                 print_str_comparison(return_char_a, return_char_b);
+                break;
+            case MEMCMP_FUNC:
+                return_a = memcmp(a, b, strlen(a)); 
+                return_b = ft_memcmp(a, b, strlen(a)); 
+                print_int_comparison(return_a, return_b);
                 break;
             default:
                 // Handle unsupported function type
@@ -273,6 +280,7 @@ int main()
     string_manipulation_test("Testing strrchr()", tests_a, tests_b, STRRCHR_FUNC);
     string_manipulation_test("Testing strncmp()", tests_a, tests_d, STRNCMP_FUNC);
     string_manipulation_test("Testing memchr()", tests_a, tests_b, MEMCHR_FUNC);
+    string_manipulation_test("Testing memcmp()", tests_a, tests_d, MEMCMP_FUNC);
 
     return 0;
 }
