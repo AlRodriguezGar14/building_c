@@ -5,7 +5,7 @@
 
 void *ft_memchr(const void *str, int c, size_t n)
 {
-    int idx = 0;
+    size_t idx = 0;
     const unsigned char *content = str;
 
     while (idx < n)

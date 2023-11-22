@@ -5,7 +5,7 @@
 
 size_t  ft_strlcpy(char *dest, const char *src, size_t size)
 {
-    int idx = 0;
+    size_t idx = 0;
 
     size_t src_len = 0;
     while (src[src_len] != 0)

@@ -2,7 +2,7 @@
 
 char *ft_strnstr(const char *haystack, const char *needle, size_t loc)
 {
-    int idx = 0;
+    size_t idx = 0;
     int match_idx;
 
     if (*needle == '\0')

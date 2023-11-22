@@ -2,7 +2,7 @@
 
 void *ft_memcpy(void *dest, void *src, size_t bytes_copied)
 {
-    int     idx = 0;
+    size_t     idx = 0;
     char    *char_dest = (char *)dest;
     char    *char_src = (char *)src;
 

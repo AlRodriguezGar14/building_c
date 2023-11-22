@@ -4,7 +4,6 @@ size_t ft_strlcat(char *dest, char *src, size_t dest_size)
 {
     size_t idx = 0;
     size_t copy_size = 0;
-    size_t real_dest_size;
 
     while (dest[copy_size] != '\0' && copy_size < dest_size - 1)
         copy_size++;

@@ -3,7 +3,6 @@
 
 char *ft_strchr(const char *str, int c)
 {
-    char *out;
     while (*str != (char)c && *str != '\0')
         str++;
     if (*str == (char)c)

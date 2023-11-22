@@ -18,7 +18,7 @@ void *ft_memmove(void *dest, const void *src, size_t n)
         return NULL;
     }
 
-    int     idx = 0;
+    size_t     idx = 0;
     while(idx < n)
     {
         tmp[idx] = char_src[idx];
