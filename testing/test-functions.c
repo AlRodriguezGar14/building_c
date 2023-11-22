@@ -3,31 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-
-#include "../isalnum.c"
-#include "../isalpha.c"
-#include "../isdigit.c"
-#include "../isascii.c"
-#include "../isprint.c"
-#include "../strlen.c"
-#include "../memset.c"
-#include "../bzero.c"
-#include "../memcpy.c"
-#include "../memmove.c"
-#include "../strlcpy.c"
-#include "../strlcat.c"
-#include "../toupper.c"
-#include "../tolower.c"
-#include "../strchr.c"
-#include "../strrchr.c"
-#include "../strncmp.c"
-#include "../memchr.c"
-#include "../memcmp.c"
-#include "../strnstr.c"
-#include "../atoi.c"
-#include "../calloc.c"
-#include "../strdup.c"
-
+#include "../libft.h"
 
 
 void print_pass_int(int original, int copy);
@@ -200,7 +176,7 @@ void test_string_content(CheckStringContent original_function, CheckStringConten
         "Str\twith\ttabs"
     };
 
-    for (int i = 0; i < sizeof(tests) / sizeof(tests[0]); i++) {
+    for (size_t i = 0; i < sizeof(tests) / sizeof(tests[0]); i++) {
         int original= original_function(tests[i]);
         int copy = my_function(tests[i]);
 

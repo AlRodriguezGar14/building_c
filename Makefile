@@ -5,7 +5,7 @@ NAME = libft.a
 SRC_DIR = .
 
 # Object files directory
-OBJ_DIR = obj_files
+OBJ_DIR = obj
 
 # List of source files
 CFILES := \
@@ -42,35 +42,38 @@ CFLAGS := -Wall -Wextra -Werror
 
 # Rule to create the obj directory if it doesn't exist
 ${OBJ_DIR}:
+	@echo "Creating directory: ${OBJ_DIR}"
 	mkdir -p ${OBJ_DIR}
 
 # Rule to build a .o file from a .c file
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c | ${OBJ_DIR}
+	@echo "Compiling: $<"
 	${CC} ${CFLAGS} -c $< -o $@
 	# Explanation: Compile a .c file into a .o file using gcc with specified flags
 
 # Rule to build the library
 ${NAME}: ${OFILES}
+	@echo "Building library: ${NAME}"
 	ar rc $@ $^
 	ranlib $@
+	@echo "Library built successfully"
 	# Explanation: Build the library (libft.a) from object files using ar and ranlib
 
 # Rule to build everything
 all: ${NAME}
+	@echo "Build complete"
 	# Explanation: Default target is to build the library
 
-# Rule to clean object files
-clean:
-	rm -rf ${OBJ_DIR} ${NAME}
-	# Explanation: Remove object files
-
 # Rule to clean object files and the library
-fclean: clean
-	rm -f ${NAME}
+clean:
+	@echo "Removing object files in ${OBJ_DIR}"
+	rm -rf ${OBJ_DIR}
+	@echo "Clean complete"
 	# Explanation: Remove object files and the library
 
 # Rule to rebuild everything
 re: fclean all
+	@echo "Rebuild complete"
 	# Explanation: Rebuild everything by cleaning and then building
 
 # Phony targets (not real files)
