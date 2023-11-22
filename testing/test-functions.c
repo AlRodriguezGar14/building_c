@@ -23,6 +23,7 @@
 #include "../strncmp.c"
 #include "../memchr.c"
 #include "../memcmp.c"
+#include "../strnstr.c"
 
 
 
@@ -50,6 +51,7 @@ typedef enum {
     STRNCMP_FUNC,
     MEMCHR_FUNC,
     MEMCMP_FUNC,
+    STRNSTR_FUNC,
 } StringManipulationFunction;
 
 
@@ -151,6 +153,10 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 return_b = ft_memcmp(a, b, strlen(a)); 
                 print_int_comparison(return_a, return_b);
                 break;
+            case STRNSTR_FUNC:
+                return_char_a = strnstr(dest_tmp, src_tmp, 50);
+                return_char_b = ft_strnstr(a, b, 50);
+                print_str_comparison(return_char_a, return_char_b);
             default:
                 // Handle unsupported function type
                 break;
@@ -256,6 +262,25 @@ int main()
         NULL
     };
 
+    // Search for content within... 
+    char *haystack[] = {
+        "Hello how are you doing?",
+        "",
+        "12232-,,,.fshaj\10k 43_-fd",
+        "tabla\ttablao\ttablita",
+        "main short",
+        NULL
+    };
+
+    char *needle[] = {
+        "are you",
+        "multipl€",
+        "nothing",
+        "tablao",
+        "",
+        NULL
+    };
+
     // Char type functions
     test_different_char_types(&isdigit, &ft_isdigit, "Testing isdigit()");   
     test_different_char_types(&isalpha, &ft_isalpha, "Testing isalpha()");   
@@ -281,6 +306,7 @@ int main()
     string_manipulation_test("Testing strncmp()", tests_a, tests_d, STRNCMP_FUNC);
     string_manipulation_test("Testing memchr()", tests_a, tests_b, MEMCHR_FUNC);
     string_manipulation_test("Testing memcmp()", tests_a, tests_d, MEMCMP_FUNC);
+    string_manipulation_test("Testing strnstr()", haystack, needle, STRNSTR_FUNC);
 
     return 0;
 }
