@@ -26,6 +26,7 @@
 #include "../strnstr.c"
 #include "../atoi.c"
 #include "../calloc.c"
+#include "../strdup.c"
 
 
 
@@ -55,6 +56,7 @@ typedef enum {
     MEMCMP_FUNC,
     STRNSTR_FUNC,
     ATOI_FUNC,
+    STRDUP_FUNC,
 } StringManipulationFunction;
 
 
@@ -165,6 +167,13 @@ void string_manipulation_test(char *title, char **tests_a, char **tests_b, Strin
                 return_a = atoi(a);
                 return_b = ft_atoi(b);
                 print_int_comparison(return_a, return_b);
+                break;
+            case STRDUP_FUNC:
+                return_char_a = strdup(a);
+                return_char_b = ft_strdup(b);
+                print_str_comparison(return_char_a, return_char_b);
+                free(return_char_a);
+                free(return_char_b);
                 break;
             default:
                 // Handle unsupported function type
@@ -367,6 +376,7 @@ int main()
     string_manipulation_test("Testing memcmp()", tests_a, tests_d, MEMCMP_FUNC);
     string_manipulation_test("Testing strnstr()", haystack, needle, STRNSTR_FUNC);
     string_manipulation_test("Testing atoi()", atoi_test, atoi_test, ATOI_FUNC);
+    string_manipulation_test("Testing strdup()", tests_a, tests_b, STRDUP_FUNC);
 
     
     // Speficic memory allocations
