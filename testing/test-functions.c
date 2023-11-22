@@ -25,6 +25,7 @@
 #include "../memcmp.c"
 #include "../strnstr.c"
 #include "../atoi.c"
+#include "../calloc.c"
 
 
 
@@ -230,6 +231,45 @@ void test_different_char_types(CharTypeChecker char_type_checker, CharTypeChecke
 }
 
 
+void test_calloc(char *title)
+{
+    print_test_title(title);
+
+    int idx = 0; 
+    int n_tests = 5;
+
+    while (idx <= n_tests)
+    {
+        int i = 0;
+        int max_size = idx * idx;
+
+        printf("Inputs: '%d' | '%lu' - ", max_size + 1, sizeof(char));
+
+        char *test_a = (char *)calloc(max_size + 1, sizeof(char)); 
+        char *test_b = (char *)ft_calloc(max_size + 1, sizeof(char));
+        print_str_comparison(test_a, test_b);
+
+        printf("Allocated outputs with content: ");
+        // Initialize content for test_a and test_b
+        for (i = 0; i < max_size; ++i)
+        {
+            test_a[i] = 'A' + i;
+            test_b[i] = 'A' + i;
+        }
+
+        // Null terminate the strings this is why the + 1 when calling calloc
+        test_a[max_size] = '\0';
+        test_b[max_size] = '\0';
+
+        print_str_comparison(test_a, test_b);
+        printf("********************\n");
+
+        idx++;
+        free(test_a);
+        free(test_b);
+    }
+}
+
 int main()
 {
 
@@ -328,6 +368,9 @@ int main()
     string_manipulation_test("Testing strnstr()", haystack, needle, STRNSTR_FUNC);
     string_manipulation_test("Testing atoi()", atoi_test, atoi_test, ATOI_FUNC);
 
+    
+    // Speficic memory allocations
+    test_calloc("Testing calloc()");
 
     return 0;
 }
