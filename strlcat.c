@@ -1,28 +1,23 @@
 #include <stdio.h>
+#include "libft.h"
 
-size_t ft_strlcat(char *dest, char *src, size_t dest_size)
+size_t ft_strlcat(char *dest, char *src, size_t dstsize)
 {
     size_t idx = 0;
-    size_t copy_size = 0;
+    size_t ret;
 
-    while (dest[copy_size] != '\0' && copy_size < dest_size - 1)
-        copy_size++;
-
-
-    while (copy_size < dest_size - 1 && src[idx] != '\0')
+    while (idx < dstsize && *dest)
     {
-        dest[copy_size] = src[idx];
-        copy_size++;
+        dest++;
         idx++;
     }
+    // src is already at the possition where attaching anything else just concats and doesn't replace
+    // imagine:
+    // dest_len = 5, sizeof_dest = dstsize = 20.
+    // maximum elements from src to copy is: 20 - 5 = 15
+    ret = ft_strlcpy(dest, src, dstsize - idx); 
 
-    dest[copy_size] = '\0';
-
-    while (src[idx] != '\0')
-    {
-        idx++;
-        copy_size++;
-    }
-
-    return copy_size;
+    // chars "copied" (appended) + dest_len
+    return ret + idx;
 }
+

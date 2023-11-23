@@ -254,44 +254,45 @@ void test_calloc(char *title)
         free(test_b);
     }
 }
+#define MAX_STRING_SIZE 256
 
 int main()
 {
 
     char *tests_a[] = {
-        "Hello how are you doing?",
-        "I'm using multipl€ ic0ns & numbers",
-        "12232-,,,.fshaj\10k 43_-fd",
-        "tabla\ttablao\ttablita",
-        "main short",
+        "Hello how are you doing?\0",
+        "I'm using multipl€ ic0ns & numbers\0",
+        "12232-,,,.fshaj\10k 43_-fd\0",
+        "tabla\ttablao\ttablita\0",
+        "main short\0",
         NULL
     };
    // For same content 
     char *tests_b[] = {
-        "Hello how are you doing?",
-        "I'm using multipl€ ic0ns & numbers",
-        "12232-,,,.fshaj\10k 43_-fd",
-        "tabla\ttablao\ttablita",
-        "main short",
+        "Hello how are you doing?\0",
+        "I'm using multipl€ ic0ns & numbers\0",
+        "12232-,,,.fshaj\10k 43_-fd\0",
+        "tabla\ttablao\ttablita\0",
+        "main short\0",
         NULL
     };
     // For different content
     char *tests_c[] = {
-        "Replacing the first",
-        "Continu€ R€placing!!1!1",
-        "These\10 are more normal chars",
-        "i like\ttabs\tabs",
-        "the c options is much larger",
+        "Replacing the first\0",
+        "Continu€ R€placing!!1!1\0",
+        "These\10 are more normal chars\0",
+        "i like\ttabs\tabs\0",
+        "the c options is much larger\0",
         NULL
     };
 
     // For comparison - similarity check
     char *tests_d[] = {
-        "Hello how are you doing?",
-        "I'm using multipl€ ic0ns or numbers",
-        "13232-,,,.fshaj\10k 43_-fd",
-        "tabla\ttablao\ttab",
-        "main short",
+        "Hello how are you doing?\0",
+        "I'm using multipl€ ic0ns or numbers\0",
+        "13232-,,,.fshaj\10k 43_-fd\0",
+        "tabla\ttablao\ttab\0",
+        "main short\0",
         NULL
     };
 
