@@ -15,9 +15,6 @@ static unsigned long ft_strlen2(const char *str)
 
 char *ft_strdup(const char *str1)
 {
-    if (str1 == NULL)
-        return NULL;
-
     int len = ft_strlen2(str1);
     int idx = 0;
 
