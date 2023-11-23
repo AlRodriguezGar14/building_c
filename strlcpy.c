@@ -2,23 +2,22 @@
 // Avoids buffer overflows
 
 #include <stdio.h>
+#include "libft.h"
 
 size_t  ft_strlcpy(char *dest, const char *src, size_t size)
 {
     size_t idx = 0;
+    size_t len = ft_strlen(src);
 
-    size_t src_len = 0;
-    while (src[src_len] != 0)
-        src_len++;
+    if (size <= 0)
+        return len;
 
     while (idx < size - 1 && src[idx] != '\0')
     {
         dest[idx] = src[idx];
         idx++;
     }
-
-
     dest[idx] = '\0';
 
-    return src_len;
+    return len;
 }
