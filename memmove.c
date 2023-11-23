@@ -4,38 +4,71 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 void *ft_memmove(void *dest, const void *src, size_t n)
 {
-    char    *char_dest = (char *)dest;
-    char    *char_src = (char *)src;
-    char    *tmp = (char *)malloc(sizeof(char) * n);
-    
-    if (char_dest == char_src)
-        return char_dest;
+    char *char_dest = (char *)dest;
+    const char *char_src = (const char *)src;
 
-    if (tmp == NULL)
-    {
+    if (dest == NULL && src == NULL)
         return NULL;
-    }
 
-    size_t     idx = 0;
-    while(idx < n)
+    if (char_dest < char_src || char_dest >= (char_src + n))
     {
-        tmp[idx] = char_src[idx];
-        idx++;
+        // copy from start to end
+        size_t idx = 0;
+        while (idx < n)
+        {
+            char_dest[idx] = char_src[idx];
+            idx++;
+        }
     }
-
-    idx = 0;
-    while(idx < n)
+    else
     {
-        char_dest[idx] = tmp[idx];
-        idx++;
+        // copy from end to start
+        size_t idx = n;
+        while (idx > 0)
+        {
+            char_dest[idx - 1] = char_src[idx - 1];
+            idx--;
+        }
     }
-
-    free(tmp);
 
     return dest;
 }
+
+// void *ft_memmove(void *dest, const void *src, size_t n)
+// {
+//     char    *char_dest = (char *)dest;
+//     char    *char_src = (char *)src;
+//     char    *tmp = (char *)malloc(sizeof(char) * n);
+//     
+//     if (char_dest == char_src)
+//         return char_dest;
+//
+//     if (tmp == NULL)
+//     {
+//         return NULL;
+//     }
+//
+//     size_t     idx = 0;
+//     while(idx < n)
+//     {
+//         tmp[idx] = char_src[idx];
+//         idx++;
+//     }
+//
+//     idx = 0;
+//     while(idx < n)
+//     {
+//         char_dest[idx] = tmp[idx];
+//         idx++;
+//     }
+//
+//     free(tmp);
+//
+//     return dest;
+// }
 
 // this should be memcpy, but I'm having compiler errors
 // try to replace it once it's converted to a library
