@@ -34,6 +34,7 @@ CFILES := \
     ${SRC_DIR}/toupper.c \
     ${SRC_DIR}/ft_substr.c \
     ${SRC_DIR}/ft_strjoin.c \
+    ${SRC_DIR}/ft_strtrim.c \
 
 # Generate object files from source files
 OFILES := $(patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${CFILES})
