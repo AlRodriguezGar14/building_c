@@ -33,13 +33,14 @@ CFILES := \
     ${SRC_DIR}/tolower.c \
     ${SRC_DIR}/toupper.c \
     ${SRC_DIR}/ft_substr.c \
+    ${SRC_DIR}/ft_strjoin.c \
 
 # Generate object files from source files
 OFILES := $(patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${CFILES})
 
 # Compiler and compilation flags
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -std=c99
 
 # Rule to create the obj directory if it doesn't exist
 ${OBJ_DIR}:
