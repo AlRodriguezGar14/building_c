@@ -30,5 +30,6 @@ int ft_isdigit(int c);
 char *ft_strchr(const char *str, int c);
 void *ft_memcpy(void *dest, void *src, size_t bytes_copied);
 int ft_atoi(const char *str);
+char *ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
