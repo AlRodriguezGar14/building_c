@@ -5,14 +5,14 @@
 
 char *ft_strjoin(char const *s1, char const *s2)
 {
-    size_t len = ft_strlen(s1) + ft_strlen(s2);
+    size_t total_len = ft_strlen(s1) + 1 + ft_strlen(s2) + 1;
 
-    char *output = (char *)ft_calloc((len), sizeof(char));
+    char *output = (char *)ft_calloc(total_len, sizeof(char));
     if (output == NULL) return NULL;
     
 
-    ft_strlcat(output, (char*)s1, len + 1);
-    ft_strlcat(output, (char*)s2, len + 1);
+    ft_strlcat(output, (char*)s1, total_len);
+    ft_strlcat(output, (char*)s2, total_len);
 
 
     return output;
