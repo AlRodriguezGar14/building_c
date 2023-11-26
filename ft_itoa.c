@@ -2,61 +2,72 @@
 #include <stdlib.h>
 #include "libft.h"
 
-char *ft_itoa(int n)
+
+int get_length(int n)
 {
-    int operator = 1;
-    int len = 1;
-    long simbol = 1;
-    long tmp_n;
-    long out_n;
-    int idx;
-    char *out;
-    
-    if (n < 0)
-        simbol *= -1;
-    out_n = n * simbol;
-    tmp_n = n * simbol;
+    int len;
 
-    // printf("out_n := %d\n", out_n);
-
-    while (tmp_n > 9)
+    len = 1;
+    while (n > 0)
     {
-        tmp_n /= 10;
-        operator *= 10;
         len++;
+        n /= 10;
     }
-    
-    if (simbol < 0)
-        len++;
+    return len;
+}
 
-    out = (char *)malloc((len+ 1) * sizeof(char));
-    if (!out)
-        return NULL;
+int get_operator(long n)
+{
+    int operator;
+
+    operator = 1;
+    while (n > 9)
+    {
+        n /= 10;
+        operator *= 10;
+    }
+    return operator;
+}
+
+void    build_output(int len, int simbol, long out_n, int operator, char *out)
+{
+    int idx;
 
     idx = 0;
     if (simbol < 0)
     {
-        *out = '-';
-        out++;
+        out[idx] = '-';
         idx++;
     }
-    while (idx < len)
+    while (idx < len - 1)
     {
-        *out = (out_n / operator) + '0';
+        out[idx] = (out_n / operator) + '0';
         out_n %= operator;
         operator /= 10;
-        out++;
         idx++;
     }
-    *out = '\0';
-    out -= idx;   
+    out[idx] = '\0';
 
+}
+char *ft_itoa(int n)
+{
+    int operator, len;
+    long simbol, out_n;
+    char *out;
+    
+    simbol = (n < 0) ? -1 : 1;
+
+    out_n = n * simbol;
+
+    operator = get_operator(out_n);
+    len = get_length(operator);
+    if (simbol < 0)
+        len++;
+
+    out = (char *)malloc((len) * sizeof(char));
+    if (!out)
+        return NULL;
+
+    build_output(len, simbol, out_n, operator, out);
     return out;
 }
-//
-// int main()
-// {
-//     char *test  = ft_itoa(-2147483648);
-//     printf("tests: %s\n", test);
-//     return (0);
-// }
