@@ -2,7 +2,7 @@
 #include "libft.h"
 
 
-int get_length(int n)
+static int get_length(int n)
 {
     int len;
 
@@ -15,7 +15,7 @@ int get_length(int n)
     return len;
 }
 
-int get_operator(long n)
+static int get_operator(long n)
 {
     int operator;
 
@@ -28,27 +28,38 @@ int get_operator(long n)
     return operator;
 }
 
+static void    write_number(int len, int simbol, long out_n, int operator, int fd)
+{
+    int idx;
+    char to_print;
+
+    idx = 0;
+    if (simbol < 0)
+    {
+        write(fd, "-", 1);
+    }
+    while (idx < len - 1)
+    {
+        to_print = (out_n / operator) + '0';
+        write(fd, &to_print, 1);
+        out_n %= operator;
+        operator /= 10;
+        idx++;
+    }
+}
 
 void ft_putnbr_fd(int n, int fd)
 {
-   char *printable;
-   int idx;
-   
-   idx = 0;
+   int operator, len;
+   long simbol, out_n;
 
-   printable = ft_itoa(n);
-   if (!printable) return;
 
-   while(printable[idx])
-   {
-       write(fd, &printable[idx], 1);
-       idx++;
-   }
-   free(printable);
-}
+    simbol = (n < 0) ? -1 : 1;
 
-int main(void)
-{
-    ft_putnbr_fd(-7654321, 1);
-    return 0;
+    out_n = n * simbol;
+
+    operator = get_operator(out_n);
+    len = get_length(operator);
+    write_number(len, simbol, out_n, operator, fd);
+
 }
