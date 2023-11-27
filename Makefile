@@ -39,6 +39,7 @@ CFILES := \
     ${SRC_DIR}/ft_itoa.c \
     ${SRC_DIR}/ft_strmapi.c \
     ${SRC_DIR}/ft_striteri.c \
+    ${SRC_DIR}/ft_putchar_fd.c \
 
 # Generate object files from source files
 OFILES := $(patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${CFILES})
