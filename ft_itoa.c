@@ -3,7 +3,7 @@
 #include "libft.h"
 
 
-int get_length(int n)
+static int get_length(int n)
 {
     int len;
 
@@ -16,7 +16,7 @@ int get_length(int n)
     return len;
 }
 
-int get_operator(long n)
+static int get_operator(long n)
 {
     int operator;
 
