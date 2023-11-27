@@ -38,13 +38,14 @@ CFILES := \
     ${SRC_DIR}/ft_split.c \
     ${SRC_DIR}/ft_itoa.c \
     ${SRC_DIR}/ft_strmapi.c \
+    ${SRC_DIR}/ft_striteri.c \
 
 # Generate object files from source files
 OFILES := $(patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${CFILES})
 
 # Compiler and compilation flags
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -std=c99
+CFLAGS := -Wall -Wextra -Werror -std=c99 -ggdb -pedantic
 
 # Rule to create the obj directory if it doesn't exist
 ${OBJ_DIR}:
