@@ -5,18 +5,12 @@
 
 char *ft_strdup(const char *str1)
 {
-    int len = ft_strlen(str1);
-    int idx = 0;
+    int len = ft_strlen(str1) + 1;
 
-    char *out = (char *)malloc((len + 1) * sizeof(char));
+    char *out = (char *)malloc(len * sizeof(char));
     if (out == NULL)
         return NULL;
-    while (idx < len)
-    {
-        out[idx] = str1[idx];
-        idx++;
-    }
-    out[idx] = '\0';
-    
+ 
+    ft_memcpy(out, (char *)str1, len);
     return out;
 }
