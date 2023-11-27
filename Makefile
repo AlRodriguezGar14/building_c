@@ -41,6 +41,7 @@ CFILES := \
     ${SRC_DIR}/ft_striteri.c \
     ${SRC_DIR}/ft_putchar_fd.c \
     ${SRC_DIR}/ft_putstr_fd.c \
+    ${SRC_DIR}/ft_putendl_fd.c \
 
 # Generate object files from source files
 OFILES := $(patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${CFILES})
