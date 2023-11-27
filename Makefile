@@ -2,36 +2,36 @@
 NAME = libft.a
 
 # Source code directory
-SRC_DIR = .
+SRC_DIR = ./src
 
 # Object files directory
 OBJ_DIR = obj
 
 # List of source files
 CFILES := \
-    ${SRC_DIR}/atoi.c \
-    ${SRC_DIR}/bzero.c \
-    ${SRC_DIR}/calloc.c \
-    ${SRC_DIR}/isalnum.c \
-    ${SRC_DIR}/isalpha.c \
-    ${SRC_DIR}/isascii.c \
-    ${SRC_DIR}/isdigit.c \
-    ${SRC_DIR}/isprint.c \
-    ${SRC_DIR}/memcmp.c \
-    ${SRC_DIR}/memcpy.c \
-    ${SRC_DIR}/memchr.c \
-    ${SRC_DIR}/memmove.c \
-    ${SRC_DIR}/memset.c \
-    ${SRC_DIR}/strchr.c \
-    ${SRC_DIR}/strdup.c \
-    ${SRC_DIR}/strlcat.c \
-    ${SRC_DIR}/strlcpy.c \
-    ${SRC_DIR}/strlen.c \
-    ${SRC_DIR}/strncmp.c \
-    ${SRC_DIR}/strnstr.c \
-    ${SRC_DIR}/strrchr.c \
-    ${SRC_DIR}/tolower.c \
-    ${SRC_DIR}/toupper.c \
+    ${SRC_DIR}/ft_atoi.c \
+    ${SRC_DIR}/ft_bzero.c \
+    ${SRC_DIR}/ft_calloc.c \
+    ${SRC_DIR}/ft_isalnum.c \
+    ${SRC_DIR}/ft_isalpha.c \
+    ${SRC_DIR}/ft_isascii.c \
+    ${SRC_DIR}/ft_isdigit.c \
+    ${SRC_DIR}/ft_isprint.c \
+    ${SRC_DIR}/ft_memcmp.c \
+    ${SRC_DIR}/ft_memcpy.c \
+    ${SRC_DIR}/ft_memchr.c \
+    ${SRC_DIR}/ft_memmove.c \
+    ${SRC_DIR}/ft_memset.c \
+    ${SRC_DIR}/ft_strchr.c \
+    ${SRC_DIR}/ft_strdup.c \
+    ${SRC_DIR}/ft_strlcat.c \
+    ${SRC_DIR}/ft_strlcpy.c \
+    ${SRC_DIR}/ft_strlen.c \
+    ${SRC_DIR}/ft_strncmp.c \
+    ${SRC_DIR}/ft_strnstr.c \
+    ${SRC_DIR}/ft_strrchr.c \
+    ${SRC_DIR}/ft_tolower.c \
+    ${SRC_DIR}/ft_toupper.c \
     ${SRC_DIR}/ft_substr.c \
     ${SRC_DIR}/ft_strjoin.c \
     ${SRC_DIR}/ft_strtrim.c \
