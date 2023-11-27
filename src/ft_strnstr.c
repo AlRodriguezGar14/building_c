@@ -2,27 +2,25 @@
 #include <stdio.h>
 #include "../libft.h"
 
+// loc is the maximum number of characters to compare in the haystack
 char *ft_strnstr(const char *haystack, const char *needle, size_t loc)
 {
-    size_t idx = 0;
-    int match_idx;
+    size_t idx;
+    size_t needle_idx;
 
     if (*needle == '\0')
         return (char *)haystack;
 
+    idx = 0;
     while (idx < loc && haystack[idx])
     {
-        match_idx = idx;
-        if (haystack[idx] == *needle)
+        needle_idx = 0;
+        // double check till the end the match
+        while (haystack[idx + needle_idx] == needle[needle_idx] && (idx + needle_idx) < loc)
         {
-            while (haystack[idx] == *needle && idx < loc)
-            {
-                needle++;
-                if (!*needle || idx >= loc)
-                    return (char *)&haystack[match_idx];
-                idx++;
-            }
-            needle -= (idx - match_idx); // reset needle in the case it is not a match
+            needle_idx++;
+            if (!needle[needle_idx])
+                return (char *)&haystack[idx];
         }
         idx++;
     }
