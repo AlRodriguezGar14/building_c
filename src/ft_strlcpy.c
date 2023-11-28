@@ -4,20 +4,20 @@
 #include <stdio.h>
 #include "../libft.h"
 
-size_t  ft_strlcpy(char *dest, const char *src, size_t size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-    size_t idx = 0;
-    size_t len = ft_strlen(src);
+	size_t	idx;
+	size_t	len;
 
-    if (size <= 0)
-        return len;
-
-    while (idx < size - 1 && src[idx] != '\0')
-    {
-        dest[idx] = src[idx];
-        idx++;
-    }
-    dest[idx] = '\0';
-
-    return len;
+	len = ft_strlen(src);
+	if (size <= 0)
+		return (len);
+	idx = 0;
+	while (idx < size - 1 && src[idx] != '\0')
+	{
+		dest[idx] = src[idx];
+		idx++;
+	}
+	dest[idx] = '\0';
+	return (len);
 }
