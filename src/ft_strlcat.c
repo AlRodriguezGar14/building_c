@@ -5,19 +5,19 @@
 // src is already at the possition where attaching anything else
 // just concats and doesn't replace
 // imagine:
-// dest_len = 5, sizeof_dest = dstsize = 20.
+// dst_len = 5, sizeof_dst = dstsize = 20.
 // maximum elements from src to copy is: 20 - 5 = 15
-size_t	ft_strlcat(char *dest, char *src, size_t dstsize)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	idx;
 	size_t	ret;
 
 	idx = 0;
-	while (idx < dstsize && *dest)
+	while (idx < dstsize && *dst)
 	{
-		dest++;
+		dst++;
 		idx++;
 	}
-	ret = ft_strlcpy(dest, src, dstsize - idx);
+	ret = ft_strlcpy(dst, src, dstsize - idx);
 	return (ret + idx);
 }

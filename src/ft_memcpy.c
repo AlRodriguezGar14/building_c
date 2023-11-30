@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void	*ft_memcpy(void *dest, void *src, size_t bytes_copied)
+void	*ft_memcpy(void *dest, const void *src, size_t bytes_copied)
 {
 	size_t	idx;
 	char	*char_dest;
