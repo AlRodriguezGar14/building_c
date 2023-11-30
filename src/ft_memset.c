@@ -11,8 +11,9 @@ into each of the first n characters of the object pointed to by s.
 // Casting to unsigned char is very important to guarantee non-wanted behavior
 // and data overflows
 // it is also the way the original function operates
+#include <stdlib.h>
 
-void	*ft_memset(void *buffer, int val, unsigned long len)
+void	*ft_memset(void *buffer, int val, size_t len)
 {
 	unsigned char	*p;
 

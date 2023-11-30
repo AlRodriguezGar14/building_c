@@ -1,4 +1,6 @@
-void	ft_bzero(void *buffer, unsigned long len)
+#include <stdio.h>
+
+void	ft_bzero(void *buffer, size_t len)
 {
 	unsigned char	*p;
 

@@ -1,6 +1,8 @@
-unsigned long	ft_strlen(const char *str)
+#include <stdio.h>
+
+size_t	ft_strlen(const char *str)
 {
-	unsigned long	idx;
+	size_t	idx;
 
 	idx = 0;
 	while (str[idx] != 0)
