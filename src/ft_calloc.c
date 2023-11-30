@@ -3,13 +3,13 @@
 #include <string.h>
 #include "../libft.h"
 
-void	*ft_calloc(int n_elements, int data_type)
+void	*ft_calloc(size_t count, size_t size)
 {
 	char	*assignable;
 	int		total;
 	void	*allocated;
 
-	total = n_elements * data_type;
+	total = count * size;
 	allocated = malloc(total);
 	if (allocated == NULL)
 		return (NULL);
