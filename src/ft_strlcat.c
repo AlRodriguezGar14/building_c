@@ -12,12 +12,9 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	idx;
 	size_t	ret;
 
-	idx = 0;
-	while (idx < dstsize && *dst)
-	{
+	idx = -1;
+	while (++idx < dstsize && *dst)
 		dst++;
-		idx++;
-	}
 	ret = ft_strlcpy(dst, src, dstsize - idx);
 	return (ret + idx);
 }
