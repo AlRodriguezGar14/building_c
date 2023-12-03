@@ -1,5 +1,7 @@
 #ifndef LIBFT
 # define LIBFT
+#define TRUE 1
+#define FALSE 0
 
 #include <stdio.h>
 #include <unistd.h>
