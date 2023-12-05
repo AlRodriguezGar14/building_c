@@ -7,9 +7,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*substr;
 	size_t	slen;
 
-	slen = ft_strlen(s);
 	if (!s)
 		return (NULL);
+	slen = ft_strlen(s);
 	if (len == 0 || start >= slen)
 	{
 		substr = (char *)malloc(sizeof(char));

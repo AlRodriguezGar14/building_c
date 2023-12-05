@@ -23,6 +23,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*output;
 
 	start = 0;
+	if (!s1)
+		return (NULL);
 	while (s1[start] && check_match(s1[start], set) == 0)
 		start++;
 	if (start == ft_strlen(s1))

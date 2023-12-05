@@ -7,6 +7,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	total_len;
 	char	*output;
 
+	if (!s1)
+		return (NULL);
 	total_len = ft_strlen(s1) + 1 + ft_strlen(s2) + 1;
 	output = (char *)ft_calloc(total_len, sizeof(char));
 	if (output == NULL)
