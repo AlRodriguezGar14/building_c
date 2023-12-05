@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../libft.h"
 
-size_t	break_content(char const *s, char c, char **out)
+static size_t	break_content(char const *s, char c, char **out)
 {
 	char	*tmp;
 	size_t	idx;
@@ -31,7 +31,7 @@ size_t	break_content(char const *s, char c, char **out)
 	return (idx);
 }
 
-size_t	count_words(char const *s, char c)
+static size_t	count_words(char const *s, char c)
 {
 	size_t	counter;
 
@@ -50,6 +50,13 @@ size_t	count_words(char const *s, char c)
 	return (counter);
 }
 
+static void	free_output(char **output, size_t counter)
+{
+	while (counter > 0)
+		free(output[--counter]);
+	free(output);
+}
+
 // count = number of subarrays in out
 // Default fail return: -1
 char	**ft_split(char const *s, char c)
@@ -57,28 +64,22 @@ char	**ft_split(char const *s, char c)
 	char	**out;
 	size_t	idx;
 	size_t	count;
-	size_t	counter;
 
-	idx = 0;
-	count = 0;
-	counter = count_words(s, c);
-	out = ft_calloc(counter + 1, sizeof(char *));
+	out = ft_calloc(count_words(s, c) + 1, sizeof(char *));
 	if (out == NULL)
 		return (NULL);
+	count = -1;
 	while (*s)
 	{
 		if (*s != c)
 		{
-			idx = break_content(s, c, &out[count]);
-			if (idx == (size_t)-1)
+			idx = break_content(s, c, &out[++count]);
+			if ((long long)idx == -1)
 			{
-				while (count > 0)
-					free(out[--count]);
-				free(out);
+				free_output(out, count);
 				return (NULL);
 			}
 			s += idx;
-			count++;
 		}
 		else
 			s++;
