@@ -10,7 +10,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1)
 		return (NULL);
 	total_len = ft_strlen(s1) + 1 + ft_strlen(s2) + 1;
-	output = (char *)ft_calloc(total_len, sizeof(char));
+	output = (char *)ft_calloc(total_len - 1, sizeof(char));
 	if (output == NULL)
 		return (NULL);
 	ft_strlcat(output, (char *)s1, total_len);
