@@ -7,8 +7,6 @@ size_t	break_content(char const *s, char c, char **out)
 	char	*tmp;
 	size_t	idx;
 
-	if (!s || !c)
-		return (0);
 	tmp = (char *)ft_calloc(ft_strlen(s) + 1, sizeof(char));
 	if (tmp == NULL)
 		return (0);
