@@ -7,15 +7,19 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new_list;
 	t_list	*node;
+	void	*mapd_content;
 
 	if (!lst)
 		return (NULL);
 	new_list = NULL;
 	while (lst)
 	{
-		node = ft_lstnew(f(lst->content));
+		mapd_content = f(lst->content);
+		node = ft_lstnew(mapd_content);
 		if (!node)
 		{
+			if (mapd_content)
+				free(mapd_content);
 			ft_lstclear(&new_list, del);
 			return (NULL);
 		}
