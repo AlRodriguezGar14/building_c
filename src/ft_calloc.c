@@ -6,7 +6,7 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	char	*assignable;
-	int		total;
+	size_t	total;
 	void	*allocated;
 
 	total = count * size;
